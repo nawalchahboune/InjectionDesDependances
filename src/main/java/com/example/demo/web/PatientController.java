@@ -1,5 +1,7 @@
 package com.example.demo.web;
 
+import java.security.Timestamp;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -26,7 +28,21 @@ public class PatientController {
 		model.addAttribute("patients",pagePatients.getContent());
 		model.addAttribute("pages", new int[pagePatients.getTotalPages()]);
 		model.addAttribute("currentPage",pagePatients.getNumber());
+		Date dutil= new Date();
+		System.out.println("++++____++++");
+		System.out.println("dutil" + dutil);
+		System.out.println("++++____++++");
+		java.sql.Date dsql= new java.sql.Date(30);
+		System.out.println("dsqlp"+dsql);
+		java.sql.Timestamp dtsmp=new java.sql.Timestamp(30);
+		System.out.println("dstmp"+dtsmp);
 	//	System.out.println("pages: "+ (new int[pagePatients.getTotalPages()]).length);
 		return "patients";
+	}
+@GetMapping(path="/deletePatient")
+	
+	public String delete(Long id) {
+	patientRep.deleteById(id);
+		return "redirect:/patients";
 	}
 }
